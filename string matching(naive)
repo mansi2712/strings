@@ -1,0 +1,28 @@
+//naive approach to find pattern in a text
+#include<iostream>
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+	string t,p;
+	cin>>t>>p;
+	int n=t.length();
+	int m=p.length();
+	for(int s=0;s<=n-m;s++)
+	{
+		int i=s;
+		for(int j=0;j<m;)
+		{
+			if(t[i]!=p[j])
+				break;
+			if(t[i]==p[j])
+			{
+				i++;
+				j++;
+			}
+			if((j==(m-1))&&(t[i]==p[j]))
+				cout<<"match found at "<<s<<endl;
+		}
+	}
+	return 0;
+}

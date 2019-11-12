@@ -1,4 +1,4 @@
-//rabin karp algorithm for string pattern matching
+//rabin karp algorithm for string pattern matching for numbers in string
 #include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
@@ -11,7 +11,6 @@ int main()
 	int d=10,a=0,mod=13;
 	int h=pow(d,(m-1));
 	h=h%mod;
-	cout<<h<<endl;
 	int *arr=new int[n-m]{0};
 	for(int i=0;i<m;i++)
 	{
@@ -23,8 +22,8 @@ int main()
 	{
 		if(a==arr[s])
 		{
-			int i=s;
-			for(int j=0;j<m;)
+			int i=s,j;
+			for(j=0;j<m;)
 			{
 				if(p[j]!=t[i])
 					break;
@@ -36,6 +35,8 @@ int main()
 				if((j==(m-1))&&(p[j]==t[i]))
 					cout<<" match found at index "<<s+1<<endl;
 			}
+			if(j!=m)
+				break;
 		}
 		arr[s+1]=(d*(((arr[s]-h*((int)(t[s]-'0')))%mod+mod)%mod)+((int)(t[s+m]-'0')))%mod;
 		//(((arr[s]-h*((int)(t[s]-'0')))%mod+mod)%mod) to conert negative modulus to positive

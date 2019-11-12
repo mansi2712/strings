@@ -1,0 +1,46 @@
+//rabin karp algo for string matching of letters
+#include<iostream>
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+	string t,p;
+	cin>>t>>p;
+	int n=t.length();
+	int m=p.length();
+	int d=10,a=0,mod=13;
+	int h=pow(d,(m-1));
+	h=h%mod;
+	int *arr=new int[n-m]{0};
+	for(int i=0;i<m;i++)
+	{
+		a=(a*d+((int)(p[i]-'a')))%mod;
+		//((int)(p[i]-'0')) is done to convert string char to integer sa it can be added to integer
+		arr[0]=(d*arr[0]+((int)(t[i]-'a')))%mod;
+	}
+	for(int s=0;s<n-m;s++)
+	{
+		if(a==arr[s])
+		{
+			int i=s,j;
+			for(j=0;j<m;)
+			{
+				if(p[j]!=t[i])
+					break;
+				if(p[j]==t[i])
+				{
+					i++;
+					j++;
+				}
+				if((j==(m-1))&&(p[j]==t[i]))
+					cout<<" match found at index "<<s+1<<endl;
+			}
+			if(j!=m)
+				break;
+		}
+		arr[s+1]=(d*(((arr[s]-h*((int)(t[s]-'a')))%mod+mod)%mod)+((int)(t[s+m]-'a')))%mod;
+		//(((arr[s]-h*((int)(t[s]-'0')))%mod+mod)%mod) to conert negative modulus to positive
+	}
+	delete[] arr;
+	return 0;
+}
